@@ -14,7 +14,7 @@
 
                     <a {% if section.settings.img_url != blank %} href="{{ section.settings.img_url }}" {% endif %} class="btn mt-5 mb-1 {{ section.settings.btn_color }} {{ section.settings.btn_size }}">
                         <img
-                                class="img-fluid lazyload mb-4 mb-md-0 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
+                                class="img-fluid mb-4 mb-md-0 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                                 data-src="{{ section.settings.img.src | img_url: img_size, crop: 'center' }}"
                                 alt="{{ section.settings.image.alt | escape }}"
                                 width="{{ section.settings.img_width }}"

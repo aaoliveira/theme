@@ -5,10 +5,11 @@
 {% for product in collections[upsellCollection].products %}
  <div class="c-upsell__product js-product" data-product-id="{{ product.id}}">
   <div class="c-upsell__productImage">
-   {% comment %} Fetch Product Images{% endcomment %}   
+   {% comment %} Fetch Product Images{% endcomment %}
    {% for image in product.images %}
-     <img class="c-upsell__innerImage" 
-          src="{{ image | img_url: '586x' }}"
+     <img class="c-upsell__innerImage"
+          data-src="{{ image | img_url: '586x' }}"
+          loading="lazy"
           alt="Product Img" />
    {% endfor %}
   </div>
@@ -25,7 +26,7 @@
 <script>
 
   function upsellProduct () {
-    // Create an empty Array in which we'll be pushing our product ID 
+    // Create an empty Array in which we'll be pushing our product ID
     const upsellProductArr = [];
     //get the Product ID from Attribute
     const productID = document.querySelector('.js-product').getAttribute('data-product-id');
@@ -38,8 +39,8 @@
   const button = document.querySelector('.js-atc');
   // Now Add click event use our Array to add to cart the Product button.addEventListener('click', event => {
     upsellProduct ();
-    // This is CartJS API - Attaching link for reference 
+    // This is CartJS API - Attaching link for reference
     CartJS.addItem(upsellProductArr[0], quantity = 1 );
   });
-  // Done 
+  // Done
 </script>

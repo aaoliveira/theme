@@ -43,13 +43,7 @@
     {{ content_for_layout }}
 
     {% if settings.ali_hunter_enable %}
-        <script>
-            window.onload = function () {
-                if (document.querySelector('#aha-tool-tip')) {
-                    document.querySelector('#aha-tool-tip').parentNode.remove();
-                }
-            }
-        </script>
+        {% render 'orbeecom-ali-hunter-block' %}
     {% endif %}
 
     {% if settings.botao_direito_enable %}
@@ -103,6 +97,6 @@
             }
         </script>
     {% endif %}
-
+    {% render 'optimizer' %}
     </body>
 </html>

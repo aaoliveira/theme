@@ -48,7 +48,7 @@
                                     </a>
                                 </span>
                                 <img
-                                    class="mt-2 mb-2 lazyload"
+                                    class="mt-2 mb-2"
                                     data-src="{{ 'testimonial-rating.png' | asset_img_url: 'master' }}"
                                     alt=""
                                     width="100"
@@ -65,7 +65,7 @@
                                     {% if block.settings.customer_photo != blank %}
                                         {% assign image_size = section.settings.customer_photo_size | append: 'x' | append: section.settings.customer_photo_size %}
                                         <img
-                                            class="img-fluid lazyload {% if section.settings.customer_photo_circle %}rounded-circle{% else %}rounded{% endif %}"
+                                            class="img-fluid {% if section.settings.customer_photo_circle %}rounded-circle{% else %}rounded{% endif %}"
                                             data-src="{{ block.settings.customer_photo | img_url: image_size, crop: 'center' }}"
                                             alt="{{ block.settings.customer_photo.alt }}"
                                             width="{{ section.settings.customer_photo_size }}"

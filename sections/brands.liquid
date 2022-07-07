@@ -32,7 +32,7 @@
 
                     {% assign img_size = section.settings.img_height | prepend: 'px' %}
                     <img
-                        class="img-fluid lazyload"
+                        class="img-fluid"
                         data-src="{{ block.settings.image | img_url: img_size, crop: 'center' }}"
                         alt="{{ block.settings.image.alt }}"
                         width="{{ section.settings.img_height | times: block.settings.image.aspect_ratio | round }}"

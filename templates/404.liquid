@@ -3,9 +3,10 @@
         id="404-image"
         class="img-fluid animate__animated animate__bounce"
         data-animate-class="animate__bounce"
-        src="{{ '404.png' | asset_img_url: 'large' }}"
+        data-src="{{ '404.png' | asset_img_url: 'large' }}"
+        loading="lazy"
         width="480"
-        height="254"> 
+        height="254">
     <h1>
         {{ 'general.404.title' | t }}
     </h1>

@@ -16,7 +16,6 @@
                     {{ 'cart.modal_title' | t }}
                     <span id="cart-modal-label-count">
                         ({{ cart.item_count }})
-
                     </span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.close' | t }}">
@@ -157,7 +156,7 @@
                                                         {{ line_item.product.title }}
                                                     </a>
                                                 </h3>
-                                                {% unless item.product.has_only_default_variant %}
+                                                {% unless line_item.product.has_only_default_variant %}
                                                     <p class="text-muted small mb-1">
                                                         {{ line_item.variant.title }}
                                                     </p>
@@ -305,12 +304,12 @@
                     {% if settings.cart_show_payment_icons %}
                             <div class="payment-icons text-center mt-2 w-100">
                                 <div class="payment-list list-unstyled d-flex justify-content-center">
-                                    <img class="payment-list__item" src="{{ 'amex.svg' | asset_url }}">
-                                    <img class="payment-list__item" src="{{ 'boleto.svg' | asset_url }}">
-                                    <img class="payment-list__item" src="{{ 'mastercard.svg' | asset_url }}">
-                                    <img class="payment-list__item" src="{{ 'visa.svg' | asset_url }}">
-                                    <img class="payment-list__item" src="{{ 'elo.svg' | asset_url }}">
-                                    <img class="payment-list__item" src="{{ 'icon-pix.png' | asset_url }}">
+                                    <img class="payment-list__item" data-src="{{ 'amex.svg' | asset_url }}" loading="lazy">
+                                    <img class="payment-list__item" data-src="{{ 'boleto.svg' | asset_url }}" loading="lazy">
+                                    <img class="payment-list__item" data-src="{{ 'mastercard.svg' | asset_url }}" loading="lazy">
+                                    <img class="payment-list__item" data-src="{{ 'visa.svg' | asset_url }}" loading="lazy">
+                                    <img class="payment-list__item" data-src="{{ 'elo.svg' | asset_url }}" loading="lazy">
+                                    <img class="payment-list__item" srdata-srcc="{{ 'icon-pix.png' | asset_url }}" loading="lazy">
                                 </div>
                             </div>
                     {% endif %}

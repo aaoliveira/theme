@@ -25,7 +25,8 @@
             {% assign image_size = section.settings.main_image_width | append: 'x' | append: section.settings.main_image_height %}
             <img
                 class="img-fluid mb-6 {% if section.settings.main_image_img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
-                src="{{ section.settings.main_image | img_url: image_size, crop: 'center' }}"
+                data-src="{{ section.settings.main_image | img_url: image_size, crop: 'center' }}"
+                loading="lazy"
                 alt="{{ section.settings.main_image.alt }}"
                 width="{{ section.settings.main_image_width }}"
                 height="{{ section.settings.main_image_height }}">
@@ -58,7 +59,8 @@
                                 {% assign image_size = section.settings.team_image_width | append: 'x' | append: section.settings.team_image_height %}
                                 <img
                                     class="img-fluid mb-3 {% if section.settings.team_image_img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
-                                    src="{{ block.settings.team_image | img_url: image_size, crop: 'center' }}"
+                                    data-src="{{ block.settings.team_image | img_url: image_size, crop: 'center' }}"
+                                    loading="lazy"
                                     alt="{{ block.settings.team_image.alt }}"
                                     width="{{ section.settings.team_image_width }}"
                                     height="{{ section.settings.team_image_height }}">

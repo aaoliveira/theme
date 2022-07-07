@@ -1,4 +1,4 @@
-<li 
+<li
     class="article-page-list-item product-item splide__slide px-2 py-4 text-center {% unless section.settings.animate_class == blank %}animate__animated animate__fast{% endunless %} {{ index | prepend: 'enter-view-step-' }}"
     data-animate="{{ section.settings.animate_class }}">
     <a class="product-link d-block text-decoration-none pt-1 pb-2 mb-2" href="{{ item.url }}">
@@ -8,13 +8,12 @@
             {% assign img_width = section.settings.img_width | default: '480' %}
             {% assign img_height = section.settings.img_height | default: '480' %}
             {% assign img_size = img_width | append: 'x' | append: img_height %}
-            <img 
-                class="misc-img product-img img-fluid lazyload {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
-                src="{{ 'blank.png' | asset_img_url: 'master' }}"
+            <img
+                class="misc-img product-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                 data-src="{{ item.image.src | img_url: img_size, crop: 'center' }}"
-                alt="{{ item.image.alt | escape }}" 
+                alt="{{ item.image.alt | escape }}"
                 width="{{ img_width }}"
-                height="{{ img_height }}" 
+                height="{{ img_height }}"
                 loading="lazy">
         </div>
 

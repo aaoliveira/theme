@@ -61,6 +61,7 @@
                 {% else %}
                     <img
                         class="img-fluid"
+                        id="logo-image"
                         src="{{ section.settings.logo | img_url: 'master' }}"
                         alt="{{ section.settings.logo.alt | default: shop.name }}"
                         width="{{ section.settings.logo_height  }}"
@@ -324,7 +325,8 @@
                             <span class="ml-2">{{ 'general.wishlist.label' | t }}</span>
                         </a>
                     </li>
-                    {% if section.settings.fone %}
+                {% endif %}
+                {% if section.settings.fone %}
                     <li       class="nav-item d-xl-none ">
 
                         <a
@@ -366,7 +368,6 @@
                     </li>
                 {% endif %}
 
-                {% endif %}
                 {% if shop.enabled_currencies.size > 1 %}
                     <li
                         id="currency-converter"
@@ -647,6 +648,7 @@
         "{{ settings.social_facebook_link }}",
         "{{ settings.social_twitter_link }}",
         "{{ settings.social_instagram_link }}",
+        "{{ settings.social_tiktok_link }}",
         "{{ settings.social_pinterest_link }}",
         "{{ settings.social_snapchat_link }}",
         "{{ settings.social_youtube_link }}",

@@ -32,8 +32,7 @@
             {% assign img_height = section.settings.img_height | default: '480' %}
             {% assign img_size = img_width | append: 'x' | append: img_height %}
             <img
-                class="misc-img product-img img-fluid lazyload {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
-                src="{{ 'blank.png' | asset_img_url: 'master' }}"
+                class="misc-img product-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                 data-src="{{ product.featured_image.src | img_url: img_size, crop: 'center' }}"
                 alt="{% if product.featured_image.alt contains 'youtube.com' %}{% else %}{{ product.featured_image.alt | escape }}{% endif %}"
                 width="{{ img_width }}"

@@ -40,7 +40,7 @@
                         <!-- Collection Image -->
                         {% assign img_size = section.settings.img_width | append: 'x' | append: section.settings.img_height %}
                         <img
-                            class="collection-list-img img-fluid lazyload {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
+                            class="collection-list-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                             data-src="{{ image | img_url: img_size, crop: 'center' }}"
                             alt="{{ image.alt | escape }}"
                             width="{{ section.settings.img_width }}"

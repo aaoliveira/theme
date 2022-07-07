@@ -601,8 +601,12 @@ $(document).ready(function(){
 
 </div>
 </div>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+          <script>
+              if(!window.moment || typeof moment == 'undefined' || moment == null)
+              {
+                  document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></' + 'script>');
+              }
+          </script>
         <script>
             // Update the count down every 1 second
             const time = setInterval(function () {

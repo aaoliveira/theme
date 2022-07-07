@@ -93,6 +93,14 @@
                             }'>
 
 
+                            {% if section.settings.no_show_rating_name %}
+                                <style>
+                                    .trw-text{
+                                        display: none !important;
+                                    }
+                                </style>
+                            {% endif %}
+
                             <div class="splide__track mb-2">
                                 <ul class="product-list animated-list splide__list list-unstyled my-n4 mx-n2">
 
@@ -308,6 +316,13 @@
             "type": "checkbox",
             "id": "show_rating",
             "label": "Mostrar avaliação",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "no_show_rating_name",
+            "label": "Desativar nome 'Avaliações' no app Ryviu",
+            "info": "Alerta: Essa opção pode causar erro em telas pequenas quando desmarcada!",
             "default": true
         },
         {

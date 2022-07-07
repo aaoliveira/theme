@@ -1,10 +1,16 @@
 <!doctype html>
 <html class="no-js no-touch" lang="{{ request.locale.iso_code }}">
-<head>{% render 'pagefly-head' %}
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_light}}">
+    <meta name="theme-color" content="{{ settings.color_light }}">
+
+    {% if settings.favicon != blank %}
+        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {% endif %}
+
+    {% render 'seo-title' %}
 
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
@@ -14,12 +20,6 @@
     {% if canonical_url != blank  %}
         <link rel="canonical" href="{{ canonical_url }}">
     {% endif %}
-
-    {% if settings.favicon != blank %}
-        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-    {% endif %}
-
-    {% render 'seo-title' %}
 
     {% if page_description %}
         <meta name="description" content="{{ page_description | escape }}">
@@ -32,7 +32,7 @@
     {{ content_for_header }}
 
 	{{ shop.metafields.loox["global_html_head"] }}
-    {% include 'judgeme_core' %}
+
     <script>
         const qtd_sem_juros_parcelamento = Number('{{ settings.qtd_sem_juros_parcelamento  }}');
         const key = '{{ settings.license_key }}'
@@ -76,13 +76,7 @@
 	{{ shop.metafields.loox["global_html_body"] }}
 
     {% if settings.ali_hunter_enable %}
-        <script>
-            window.onload = function () {
-                if (document.querySelector('#aha-tool-tip')) {
-                    document.querySelector('#aha-tool-tip').parentNode.remove();
-                }
-            }
-        </script>
+        {% render 'orbeecom-ali-hunter-block' %}
     {% endif %}
 
     {% if settings.botao_direito_enable %}
@@ -136,5 +130,6 @@
             }
         </script>
     {% endif %}
+    {% render 'optimizer' %}
 </body>
 </html>

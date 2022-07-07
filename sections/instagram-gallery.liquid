@@ -57,7 +57,7 @@
                         <a href="{{ block.settings.url }}" target="_blank">
                     {% endif %}
                         <img
-                            class="instagram-gallery-list-item-img img-fluid lazyload {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
+                            class="instagram-gallery-list-item-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                             data-src="{{ block.settings.image | img_url: img_size, crop: 'center' }}"
                             alt="{{ block.settings.image.alt | escape }}"
                             width="{{ section.settings.img_width }}"

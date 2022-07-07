@@ -33,7 +33,7 @@
         {% if article.image %}
             {% assign img_size = section.settings.img_width | append: 'x' | append: section.settings.img_height %}
             <img
-                class="article-img img-fluid w-100 mb-5 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %} lazyload"
+                class="article-img img-fluid w-100 mb-5 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                 data-src="{{ article.image | img_url: img_size, crop: 'center' }}"
                 alt="{{ article.image.alt | escape }}"
                 width="{{ section.settings.img_width }}"

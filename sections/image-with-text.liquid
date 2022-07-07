@@ -15,7 +15,7 @@
                 {% if section.settings.img != blank %}
                     {% assign img_size = section.settings.img_width | append: 'x' | append: section.settings.img_height %}
                     <img
-                        class="img-fluid lazyload mb-4 mb-md-0 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
+                        class="img-fluid mb-4 mb-md-0 {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                         data-src="{{ section.settings.img.src | img_url: img_size, crop: 'center' }}"
                         alt="{{ section.settings.image.alt | escape }}"
                         width="{{ section.settings.img_width }}"
