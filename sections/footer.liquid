@@ -17,6 +17,7 @@
                                     <img
                                             class="img-fluid"
                                             data-src="{{ section.settings.about_logo | img_url: 'master' }}"
+                                            srcset="{{ section.settings.about_logo | img_url: 'master' }}"
                                             loading="lazy"
                                             alt="{{ section.settings.about_logo | default: shop.name }}"
                                             width="{{ section.settings.about_logo_height }}"
@@ -169,16 +170,16 @@
                     <div class="social-icons col-xl-12">
                         {% if section.settings.imgpg %}
                             <div class="d-flex justify-content-center">
-                                <img class="img-fluid" data-src="{{ section.settings.imgpg | img_url: '' }}" loading="lazy" alt="image">
+                                <img class="img-fluid" data-src="{{ section.settings.imgpg | img_url: '' }}" srcset="{{ section.settings.imgpg | img_url: '' }}" loading="lazy" alt="image">
                             </div>
                         {% else %}
                             <div class="payment-list list-unstyled d-flex justify-content-center">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}" srcset="{{ 'amex.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}" srcset="{{ 'boleto.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}" srcset="{{ 'mastercard.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}" srcset="{{ 'visa.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}" srcset="{{ 'elo.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}" srcset="{{ 'icon-pix.png' | asset_url }}">
                             </div>
                         {% endif %}
                     </div>
@@ -192,7 +193,7 @@
                     <div class="social-icons col-xl-12 ">
                         {% if section.settings.imgseg %}
                             <div class="d-flex justify-content-center">
-                                <img class="img-fluid" data-src="{{ section.settings.imgseg | img_url: '' }}" loading="lazy" alt="image">
+                                <img class="img-fluid" data-src="{{ section.settings.imgseg | img_url: '' }}" srcset="{{ section.settings.imgseg | img_url: '' }}" loading="lazy" alt="image">
                             </div>
                         {% else %}
                             <div class="payment-list list-unstyled d-flex justify-content-center">
@@ -200,9 +201,10 @@
                                    target="_blank">
                                     <img class="payment-list__item-security"
                                          data-src="{{ 'google-safe-browsing-icon.png' | asset_url }}"
+                                         srcset="{{ 'google-safe-browsing-icon.png' | asset_url }}"
                                          loading="lazy">
                                 </a>
-                                <img class="payment-list__item-security" data-src="{{ 'pci-security-icon.png' | asset_url }}" loading="lazy">
+                                <img class="payment-list__item-security" data-src="{{ 'pci-security-icon.png' | asset_url }}" srcset="{{ 'pci-security-icon.png' | asset_url }}"  loading="lazy">
 
                             </div>
 

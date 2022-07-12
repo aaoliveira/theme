@@ -34,6 +34,7 @@
             <img
                 class="misc-img product-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                 data-src="{{ product.featured_image.src | img_url: img_size, crop: 'center' }}"
+                srcset="{{ product.featured_image.src | img_url: img_size, crop: 'center' }}"
                 alt="{% if product.featured_image.alt contains 'youtube.com' %}{% else %}{{ product.featured_image.alt | escape }}{% endif %}"
                 width="{{ img_width }}"
                 height="{{ img_height }}"

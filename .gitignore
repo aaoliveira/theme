@@ -1,1 +1,3 @@
 .vscode/
+config/settings_data.json
+layout/theme.liquid

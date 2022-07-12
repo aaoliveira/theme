@@ -103,6 +103,7 @@
 
                                                 <img class="collection-list-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                                                         data-src="{{ image | img_url: img_size_1600, crop: 'center' }}"
+                                                        srcset="{{ image | img_url: img_size_1600, crop: 'center' }}"
                                                         alt="{{ image.alt | escape }}"
                                                         width="{{ section.settings.img_width }}"
                                                         height="{{ section.settings.img_height }}"

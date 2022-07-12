@@ -55,6 +55,7 @@
                                                 <img
                                                     class="misc-img product-img img-fluid {% if section.settings.img_thumbnail %}img-thumbnail{% else %}rounded{% endif %}"
                                                     data-src="{{ line_item.image | img_url: img_size, crop: 'center' }}"
+                                                    srcset="{{ line_item.image | img_url: img_size, crop: 'center' }}"
                                                     loading="lazy"
                                                     alt="{{ line_item.image.alt | escape }}"
                                                     width="{{ section.settings.img_width }}"
@@ -320,12 +321,12 @@
                             {% if section.settings.show_payment_icons %}
                                 <div class="social-icons col-xl-12">
                                     <div class="payment-list list-unstyled d-flex justify-content-center">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}">
-                                    <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}" srcset="{{ 'amex.svg' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}" srcset="{{ 'boleto.svg' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}" srcset="{{ 'mastercard.svg' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}" srcset="{{ 'visa.svg' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}" srcset="{{ 'elo.svg' | asset_url }}">
+                                        <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}" srcset="{{ 'icon-pix.png' | asset_url }}">
                                   </div>
                                 </div>
                                 <br>

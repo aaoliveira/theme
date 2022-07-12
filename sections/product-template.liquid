@@ -1,17 +1,19 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 
-{% assign taxa_primeira_parcela = settings.taxa_primeira_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_segunda_parcela = settings.taxa_segunda_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_terceira_parcela = settings.taxa_terceira_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_quarta_parcela = settings.taxa_quarta_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_quinta_parcela = settings.taxa_quinta_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_sexta_parcela = settings.taxa_sexta_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_setima_parcela = settings.taxa_setima_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_oitava_parcela = settings.taxa_oitava_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_nona_parcela = settings.taxa_nona_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_decima_parcela = settings.taxa_decima_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_decima_primeira_parcela = settings.taxa_decima_primeira_parcela | divided_by: 100 | plus: 1 %}
-{% assign taxa_decima_segunda_parcela = settings.taxa_decima_segunda_parcela | divided_by: 100 | plus: 1 %}
+<script type="text/javascript">
+    var primeira_parcela_taxa = ({{ settings.taxa_primeira_parcela }}/100)+1;
+    var segunda_parcela_taxa = ({{ settings.taxa_segunda_parcela }}/100)+1;
+    var terceira_parcela_taxa = ({{ settings.taxa_terceira_parcela }}/100)+1;
+    var quarta_parcela_taxa = ({{ settings.taxa_quarta_parcela }}/100)+1;
+    var quinta_parcela_taxa = ({{ settings.taxa_quinta_parcela }}/100)+1;
+    var sexta_parcela_taxa = ({{ settings.taxa_sexta_parcela }}/100)+1;
+    var setima_parcela_taxa = ({{ settings.taxa_setima_parcela }}/100)+1;
+    var oitava_parcela_taxa = ({{ settings.taxa_oitava_parcela }}/100)+1;
+    var nona_parcela_taxa = ({{ settings.taxa_nona_parcela }}/100)+1;
+    var decima_parcela_taxa = ({{ settings.taxa_decima_parcela }}/100)+1;
+    var decima_primeira_parcela_taxa = ({{ settings.taxa_decima_primeira_parcela }}/100)+1;
+    var decima_segunda_parcela_taxa = ({{ settings.taxa_decima_segunda_parcela }}/100)+1;
+</script>
 
 <style>
 :root {
@@ -225,8 +227,6 @@
                     <span style="background-color: transparent; margin-top: 15px" class="carousel-control-next-icon" aria-hidden="true"></span>
                 </a>
             </div>
-
-
             {% endif %}
             </div>
 
@@ -256,9 +256,11 @@
 
                     {% if section.settings.frete %}
                         {% if section.settings.gif_frete %}
-                            <img data-src="{{ section.settings.gif_frete | img_url }}" alt="" loading="lazy">
+                            <img data-src="{{ section.settings.gif_frete | img_url }}" srcset="{{ section.settings.gif_frete | img_url }}" alt="" loading="lazy">
+
                         {% else %}
-                            <img data-src="{{ 'frete-gratis.gif' | asset_url }}" alt="" loading="lazy">
+                            <img data-src="{{ 'frete-gratis.gif' | asset_url }}" srcset="{{ 'frete-gratis.gif' | asset_url }}" alt="" loading="lazy">
+
                         {% endif %}
                     {% endif %}
 
@@ -330,8 +332,14 @@
                             {% comment %}<span style="margin-left:10px;color: white; background-color: #ED141C; border-radius: 10px; padding: 5px">10% OFF</span>{% endcomment %}
                         {% endif %}
                         <div class="d-flex flex-row">
-                            <span class="mb-2 product-price">
+
+                            <span class="product-price">
+                                {% if section.settings.show_valor_parcelado %}
+                                    12x R$ <span class="valorEm12xCartao"></span>
+                                    
+                                {% else %}
                                     {{ current_variant.price | money }}
+                                {% endif %}
                             </span>
 
                             {% if section.settings.desconto %}
@@ -355,10 +363,11 @@
                         {% comment %}Você economizou <b>{{ product.compare_at_price | minus: product.price | money_without_trailing_zeros }}</b>{% endcomment %}
                         {% comment %}</div>{% endcomment %}
 
+                        
                         {% if settings.parcelamento_enable %}
                             <p style="font-size: {{ section.settings.size_text_12x }}; margin-top: -9px; margin-bottom: 0;">em até 12x <strong>R$ <span class="valorEm12xCartao"></span></strong>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" >
                                     <span class="main-font-title" style="margin-left:0;color: var(--color-price); border-radius: 20px; border: 1px solid var(--color-price); padding: 2px 10px 2px 10px; font-size: {{ section.settings.size_text_economize }}"> Ver parcelamento</span>
                                 </button>
                             </p>
@@ -370,7 +379,7 @@
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                             aria-labelledby="exampleModalLabel" aria-hidden="true" >
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -389,7 +398,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>1x de R$ <span class="valorEm1xCartao"></span> à vista</td>
+                                                <td>1x de R$ <span class="valorEm1xCartao"> </span> à vista</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -475,21 +484,23 @@
                             function updateParcelamento(quantidade = 1) {
                                 const valor_produto = quantidade * Number('{{ current_variant.price | money_without_currency }}'.replace('.', '').replace(',', '.'));
                                 const qtd_sem_juros_parcelamento = Number('{{ settings.qtd_sem_juros_parcelamento }}');
-                                updateElementsWithClassName("valorEm1xCartao", (valor_produto * Number({{ taxa_primeira_parcela }})).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm2xCartao", (valor_produto *  (2 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_segunda_parcela }})) / 2  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm3xCartao", (valor_produto *  (3 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_terceira_parcela }})) / 3  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm4xCartao", (valor_produto *  (4 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_quarta_parcela }})) / 4  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm5xCartao", (valor_produto *  (5 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_quinta_parcela }})) / 5  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm6xCartao", (valor_produto *  (6 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_sexta_parcela }})) / 6  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm7xCartao", (valor_produto *  (7 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_setima_parcela }})) / 7  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm8xCartao", (valor_produto *  (8 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_oitava_parcela }})) / 8  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm9xCartao", (valor_produto *  (9 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_nona_parcela }})) / 9  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm10xCartao", (valor_produto *  (10 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_decima_parcela }})) / 10  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName("valorEm11xCartao", (valor_produto *  (11 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_decima_primeira_parcela }})) / 11  ).toFixed(2).replace('.', ','));
-                                updateElementsWithClassName('valorEm12xCartao', (valor_produto * (12 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_decima_segunda_parcela }})) / 12).toFixed(2).replace('.', ','))
+                                updateElementsWithClassName("valorEm1xCartao", (valor_produto * Number( primeira_parcela_taxa )).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm2xCartao", (valor_produto *  (2 <= qtd_sem_juros_parcelamento ? 1 : Number( segunda_parcela_taxa )) / 2  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm3xCartao", (valor_produto *  (3 <= qtd_sem_juros_parcelamento ? 1 : Number( terceira_parcela_taxa )) / 3  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm4xCartao", (valor_produto *  (4 <= qtd_sem_juros_parcelamento ? 1 : Number( quarta_parcela_taxa )) / 4  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm5xCartao", (valor_produto *  (5 <= qtd_sem_juros_parcelamento ? 1 : Number( quinta_parcela_taxa )) / 5  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm6xCartao", (valor_produto *  (6 <= qtd_sem_juros_parcelamento ? 1 : Number( sexta_parcela_taxa )) / 6  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm7xCartao", (valor_produto *  (7 <= qtd_sem_juros_parcelamento ? 1 : Number( setima_parcela_taxa )) / 7  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm8xCartao", (valor_produto *  (8 <= qtd_sem_juros_parcelamento ? 1 : Number( oitava_parcela_taxa )) / 8  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm9xCartao", (valor_produto *  (9 <= qtd_sem_juros_parcelamento ? 1 : Number( nona_parcela_taxa )) / 9  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm10xCartao", (valor_produto *  (10 <= qtd_sem_juros_parcelamento ? 1 : Number( decima_parcela_taxa )) / 10  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName("valorEm11xCartao", (valor_produto *  (11 <= qtd_sem_juros_parcelamento ? 1 : Number( decima_primeira_parcela_taxa )) / 11  ).toFixed(2).replace('.', ','));
+                                updateElementsWithClassName('valorEm12xCartao', (valor_produto * (12 <= qtd_sem_juros_parcelamento ? 1 : Number( decima_segunda_parcela_taxa )) / 12).toFixed(2).replace('.', ','))
                             }
                             updateParcelamento()
-                        </script>
+
+                            </script>
+                            
                     </div>
                 </div>
 
@@ -691,7 +702,7 @@
                                                                     title="{{ value | escape }}"
                                                                     for="option-{{ option.name | handleize }}-{{ value | handleize }}-product-{{ product.id }}">
                                                                         <img width="{{ section.settings.size_swatch }}" height="{{ section.settings.size_swatch }}" src="{{ swatch_img | img_url: '500x500', crop: 'center' }}" alt="">
-                                                            </label>
+                                                                </label>
                                                          {% endif %}
                                                     </li>
                                                 {% else %}
@@ -724,14 +735,12 @@
 
                                         {% for value in option.values %}  
                                         {% for variante in product.variants %}
-                                        {% for opcaoVariante in variante.options  %}
-                                            {% if opcaoVariante == value and variante.option2 == product.options_with_values[1].selected_value and variante.option3 == product.options_with_values[2].selected_value%}
+                                            {% if variante.option1 == value and variante.option2 == product.options_with_values[1].selected_value and variante.option3 == product.options_with_values[2].selected_value%}
                                             {%- assign kit_img = variante.featured_media -%}
                                             {%- assign kit_price = variante.price -%}
                                             {%- assign kit_compare_price = variante.compare_at_price -%}
                                             {%- assign kit_available = variante.available -%}
                                             {% endif %}
-                                        {% endfor %}
                                         {% endfor %}  
 
                                         <input type="radio"
@@ -743,9 +752,7 @@
 
                                         <label class="kit-label" for="option-{{ option.name | handleize }}-{{ value| handleize }}-product-{{ product.id }}">
 
-                                            
                                         <div class="kit-swatches-item">
-
                                             <div class="kit-content-left">
                                                 <div class="kit-product-image-wrapper">
                                                     <img class="kit-product-image" src="{{ kit_img | img_url: '500x500', crop: 'center' }}" alt="">
@@ -803,8 +810,9 @@
                                                         | prepend: '-'
                                                         | append: '%' }}
                                                 </div>
+                                                {%endif%}
                                                 
-                                                {% elsif kit_available != true %}
+                                                {% if kit_available != true %}
                                                 <div class="kit-soldout-badge kit-badges">
                                                     Esgotado
                                                 </div>
@@ -984,7 +992,7 @@
                                             const quantidade = document.getElementById("quantitySelected").value
                                             updateParcelamento(quantidade)
                                             const valor_produto = quantidade * Number('{{ current_variant.price | money_without_currency }}'.replace('.', '').replace(',', '.'));
-                                            updateElementsWithClassName('valorEm12xCartao', (valor_produto * (12 <= qtd_sem_juros_parcelamento ? 1 : Number({{ taxa_decima_segunda_parcela }})) / 12).toFixed(2).replace('.', ','))
+                                            updateElementsWithClassName('valorEm12xCartao', (valor_produto * (12 <= qtd_sem_juros_parcelamento ? 1 : Number( decima_segunda_parcela_taxa )) / 12).toFixed(2).replace('.', ','))
                                         });
                                     </script>
 
@@ -1166,12 +1174,12 @@
                     <div class="pb-6 pt-3">
                         <div class="social-icons col">
                             <div class="payment-list justify-content-center">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}">
-                                <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'amex.svg' | asset_url }}" srcset="{{ 'amex.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'boleto.svg' | asset_url }}" srcset="{{ 'boleto.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'mastercard.svg' | asset_url }}" srcset="{{ 'mastercard.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'visa.svg' | asset_url }}" srcset="{{ 'visa.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'elo.svg' | asset_url }}" srcset="{{ 'elo.svg' | asset_url }}">
+                                <img class="payment-list__item" loading="lazy" data-src="{{ 'icon-pix.png' | asset_url }}" srcset="{{ 'icon-pix.png' | asset_url }}">
                             </div>
                         </div>
                     </div>
@@ -1300,6 +1308,12 @@
             "type": "checkbox",
             "id": "title_small_font",
             "label": "Fonte pequena do título do produto",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "show_valor_parcelado",
+            "label": "Mostrar valor parcelado no principal",
             "default": false
         },
         {
